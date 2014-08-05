@@ -1,0 +1,5 @@
+fake:
+  id: 1
+  description: "Fake"
+  klass: "::Piggybak::PaymentCalculator::Fake"
+  active: true

@@ -1,40 +1,84 @@
 require 'test_helper'
 
 class PiggybakFreeShippingTest < ActionDispatch::IntegrationTest
-  fixtures :images, :piggybak_sellables
+  fixtures :images,
+    :piggybak_sellables,
+    :piggybak_shipping_methods,
+    :piggybak_shipping_method_values,
+    :piggybak_payment_methods,
+    :piggybak_orders
 
   def setup_order
     post_via_redirect piggybak.cart_add_path, { sellable_id: 1, quantity: 1 }
     get_via_redirect piggybak.orders_path
   end
 
-  test "order with free shpping item has free shipping as only option" do
-    setup_order
+  def order_params
+    { "order" => {
+       "email" => "test@endpoint.com",
+       "phone" => "6304844834",
+       "billing_address_attributes" => {
+         "firstname"=>"S",
+         "lastname"=>"S",
+         "address1"=>"123",
+         "address2"=>"",
+         "city"=>"SLC",
+         "country_id"=>"405",
+         "state_id"=>"6926",
+         "zip"=>"84115"
+       },
+       "shipping_address_attributes" => {
+         "firstname" => "S",
+         "lastname"=>"S",
+         "address1"=>"123",
+         "address2"=>"",
+         "city"=>"SLC",
+         "country_id"=>"405",
+         "state_id"=>"6926",
+         "zip"=>"84115" },
+       "line_items_attributes" => {
+         "0" => {
+           "line_item_type" => "shipment",
+           "shipment_attributes" => {
+             "shipping_method_id"=>"4"
+           }
+         },
+         "1" => {
+           "line_item_type" => "payment",
+           "payment_attributes" => {
+             "number" => "4111111111111111",
+             "verification_value"=>"333",
+             "month"=>"1",
+             "year"=>"2016"
+           }
+         }
+       }
+     }
+    }
+  end 
 
-puts "stephie: #{Image.all.inspect}"
-=begin
-    p = order_params
-    p["order"]["line_items_attributes"]["0"]["shipment_attributes"]["shipping_method_id"] = "5"
-    post_via_redirect piggybak.orders_path, p, { "User-Agent" => "Testbot" }
-
-    # Assert tax value is correct
-    order = assigns(:order)
-    assert_not_nil order
-    assert order.total = 59.98
-    shipping = order.line_items.detect { |li| li.line_item_type == "shipment" }
-    assert_not_nil shipping
-    assert shipping.price == 20.00
-=end
+  test "cart with free shpping item has free shipping as only option" do
+    cookies["cart"] = "1:1"
+    xhr :get, piggybak.orders_shipping_path
+    methods = JSON.parse(response.body)
+    assert methods == [{"label" => "Free Shipping $0.00", "id" => 3, "rate" => 0.0 }]
   end
-
-=begin
-  test "order with free shipping item and another item has regular shipping options" do
-    setup_order
+  test "cart with non-free shpping item has regular shipping options" do
+    cookies["cart"] = "2:1"
+    xhr :get, piggybak.orders_shipping_path
+    methods = JSON.parse(response.body)
+    assert methods.size == 2
+    assert methods.include?({ "label" => "Standard Shipping $10.00", "id" => 1, "rate" => 10.0 })
+    assert methods.include?({ "label" => "Express Shipping $20.00", "id" => 2, "rate" => 20.0 })
+    assert !methods.include?({ "label" => "Free Shipping $0.00", "id" => 3, "rate" => 0.0 })
   end
-
-  test "order with non-free shipping items has regular shipping options" do
-    setup_order
+  test "cart with mixed items regular shipping options" do
+    cookies["cart"] = "1:1;2:1"
+    xhr :get, piggybak.orders_shipping_path
+    methods = JSON.parse(response.body)
+    assert methods.size == 2
+    assert methods.include?({ "label" => "Standard Shipping $10.00", "id" => 1, "rate" => 10.0 })
+    assert methods.include?({ "label" => "Express Shipping $20.00", "id" => 2, "rate" => 20.0 })
+    assert !methods.include?({ "label" => "Free Shipping $0.00", "id" => 3, "rate" => 0.0 })
   end
-=end
-
 end

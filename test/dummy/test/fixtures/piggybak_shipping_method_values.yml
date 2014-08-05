@@ -1,0 +1,17 @@
+standard_rate:
+  id: 1
+  shipping_method_id: 1
+  key: "rate"
+  value: "10.00"
+
+express:
+  id: 2
+  shipping_method_id: 2
+  key: "rate"
+  value: "20.00"
+
+free:
+  id: 3
+  shipping_method_id: 3
+  key: "product_method_name"
+  value: "free_shipping"

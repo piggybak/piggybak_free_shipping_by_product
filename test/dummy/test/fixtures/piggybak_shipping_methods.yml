@@ -1,0 +1,17 @@
+standard:
+  id: 1
+  description: "Standard Shipping"
+  klass: "::Piggybak::ShippingCalculator::FlatRate"
+  active: true
+
+express:
+  id: 2
+  description: "Express Shipping"
+  klass: "::Piggybak::ShippingCalculator::FlatRate"
+  active: true
+
+free:
+  id: 3
+  description: "Free Shipping"
+  klass: "::PiggybakFreeShipping::FreeShippingByProduct"
+  active: true
