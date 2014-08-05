@@ -1,0 +1,6 @@
+require "piggybak_free_shipping/engine"
+require "piggybak_free_shipping/free_shipping_by_product"
+require "piggybak_free_shipping/piggybak_orders_controller_decorator"
+
+module PiggybakFreeShipping
+end
