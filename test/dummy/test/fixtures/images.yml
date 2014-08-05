@@ -1,0 +1,9 @@
+image1:
+  id: 1
+  title: "Image 1"
+  free_shipping: true
+
+image2:
+  id: 2
+  title: "Image 2"
+  free_shipping: false

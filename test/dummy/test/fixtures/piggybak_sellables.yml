@@ -1,0 +1,15 @@
+image1_sellable:
+  id: 1
+  item_id: 1
+  item_type: "Image"
+  sku: "image1"
+  description: "image1"
+  price: 9.99
+
+image2_sellable:
+  id: 2
+  item_id: 2
+  item_type: "Image"
+  sku: "image2"
+  description: "image2"
+  price: 10.99
