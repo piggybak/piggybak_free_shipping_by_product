@@ -6,7 +6,7 @@ PiggybakFreeShipping
 * Note that if you have multiple product types in your cart, free shipping is only offered for those orders where all items respond\_to? the free shipping method and that value is true.
 
 ### Requirements
-* This gem requires existing installation of Piggybak. The current version of the gem supports Rails 4, however, additional versions will support Rails 3.
+* This gem requires existing installation of Piggybak. The current version of the gem supports Rails 3.2.* and 4.
 
 ### Installation
 * To install, first add gem "piggybak\_free\_shpping\_by\_product" and run bundle install.

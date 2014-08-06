@@ -9,5 +9,8 @@ module PiggybakFreeShippingByProduct
     config.after_initialize do
       ::Piggybak::OrdersController.send(:include, ::PiggybakFreeShippingByProduct::PiggybakOrdersControllerDecorator)
     end
+    config.to_prepare do
+      ::Piggybak::OrdersController.send(:include, ::PiggybakFreeShippingByProduct::PiggybakOrdersControllerDecorator)
+    end
   end
 end
