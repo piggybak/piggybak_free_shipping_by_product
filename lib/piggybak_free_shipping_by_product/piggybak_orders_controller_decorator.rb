@@ -1,4 +1,4 @@
-module PiggybakFreeShipping
+module PiggybakFreeShippingByProduct
   module PiggybakOrdersControllerDecorator
     extend ActiveSupport::Concern
 
@@ -12,7 +12,7 @@ module PiggybakFreeShipping
       cart.set_extra_data(params)
       shipping_methods = Piggybak::ShippingMethod.lookup_methods(cart)
       
-      free_shipping_method = Piggybak::ShippingMethod.all.detect { |s| s.klass == "::PiggybakFreeShipping::FreeShippingByProduct" }
+      free_shipping_method = Piggybak::ShippingMethod.all.detect { |s| s.klass == "::PiggybakFreeShippingByProduct::FreeShippingByProduct" }
       if free_shipping_method.present?
         free_shipping_available = shipping_methods.detect { |s| s[:id] == free_shipping_method.id }
         if free_shipping_available.present?
@@ -25,5 +25,3 @@ module PiggybakFreeShipping
     end
   end
 end
-
-#Piggybak::OrdersController.send(:include, PiggybakFreeShipping::PiggybakOrdersControllerDecorator)

@@ -1,12 +1,12 @@
 $:.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
-require "piggybak_free_shipping/version"
+require "piggybak_free_shipping_by_product/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "piggybak_free_shipping"
-  s.version     = PiggybakFreeShipping::VERSION
+  s.name        = "piggybak_free_shipping_by_product"
+  s.version     = PiggybakFreeShippingByProduct::VERSION
   s.authors     = ["Steph Skardal"]
   s.email       = ["steph@endpoint.com"]
   s.homepage    = "http://www.endpoint.com/"

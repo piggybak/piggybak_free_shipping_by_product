@@ -1,4 +1,4 @@
-module PiggybakFreeShipping
+module PiggybakFreeShippingByProduct
   class FreeShippingByProduct
     # This assumes that your product has a method defined by your configuration
     KEYS = ["product_method_name"]

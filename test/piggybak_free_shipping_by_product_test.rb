@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PiggybakFreeShippingTest < ActionDispatch::IntegrationTest
+class PiggybakFreeShippingByProductTest < ActionDispatch::IntegrationTest
   fixtures :images,
     :piggybak_sellables,
     :piggybak_shipping_methods,

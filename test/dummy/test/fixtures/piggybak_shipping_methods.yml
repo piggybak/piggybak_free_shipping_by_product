@@ -13,5 +13,5 @@ express:
 free:
   id: 3
   description: "Free Shipping"
-  klass: "::PiggybakFreeShipping::FreeShippingByProduct"
+  klass: "::PiggybakFreeShippingByProduct::FreeShippingByProduct"
   active: true
