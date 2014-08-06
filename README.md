@@ -11,4 +11,5 @@ PiggybakFreeShipping
 ### Installation
 * To install, first add gem "piggybak\_free\_shpping\_by\_product" and run bundle install.
 * Next, create a product method that you will use to indicate free shipping for a product. This can either be a boolean attribute on your product table, or a more complex method. This code should live in your parent Rails application.
+* If you are using a table attribute to indicate free shipping, you may want to add this field to be visible in Rails Admin.
 * Next, go to the Piggybak Admin and create a shipping method which uses the Free Shipping By Product calculator. You must create a metadata value to indicate the product method name, e.g. key is "product\_method\_name", and value is your method or attribute. Save this shipping method.
